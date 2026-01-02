@@ -1,0 +1,12 @@
+# Prevent directory listing
+Options -Indexes
+
+# Deny public access to the data folder
+RewriteEngine On
+RewriteRule ^data/.*$ - [F,L]
+
+# Redirect directory-style requests to index.php
+# This allows /user/login/ to be handled by our router
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
